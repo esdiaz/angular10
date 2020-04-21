@@ -1,0 +1,31 @@
+<h1>Curso Angular</h1>
+<p *ngIf="!isAvailable; else available">Lanzamiento: {{launchDate | date:"dd MMM yyyy h:mm:ss":"-0000" | uppercase}}</p>
+<ng-template #available>
+  <span class="highlight"> Curso disponible</span>
+</ng-template>
+
+<div class="category" [ngSwitch]="category">
+  <span *ngSwitchCase="'WEB'">Desarrollo Web</span>
+  <span *ngSwitchCase="'mobile'">Desarrollo Móvil</span>
+  <span *ngSwitchCase="'other'">Desarrollo General</span>
+  <span *ngSwitchDefault>No especificado</span>
+</div>
+<h3 [redBorder]="'blue'" [redClass]="'blue-border'">Tutor: {{name}}</h3>
+
+<div [@showUp]="moreInformation" style="overflow: hidden;">
+  <a (click)="toggleMoreInformation()">Más información <i class="fa " [ngClass]="{'fa-chevron-circle-down': !moreInformation, 'fa-chevron-circle-up': moreInformation}"></i></a>
+  <p>
+    <span style="display: block; font-weight: bold;">
+      {{seconds | secondsToTimeTransform:false}}
+    </span>
+    Este es un curso sobre TypeScript y Angular Framework 10 donde aprenderemos el usuaro de Componentes, Data Binding, etc.
+  </p>
+</div>
+
+<ul>
+  <li *ngFor="let topic of topics; index as position">{{position + 1}}.- {{topic}}</li>
+</ul>
+
+<div>
+  <button [disabled]="!isAvailable || !subscribed" [ngClass]="{active: isAvailable && subscribed, swadow: !isAvailable}" type="button" name="button">Inscribir {{price | currency:'MXN'}}</button>
+</div>
